@@ -18,7 +18,7 @@ class CustomSignIn extends SignIn {
 
   showComponent() {
     return (
-      <div>
+      <div style={{clear: "both", minWidth: "220px", margin: "0 auto", padding: "20px"}}>
         <img src={logo} alt="logo" style={{height: "50px", width: "84px", paddingBottom: "30px"}}/>
         <div className="aws-signin-general-label-box">
           <div className="aws-signin-general-link-box-no-margin main-table">
