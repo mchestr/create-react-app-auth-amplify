@@ -11,7 +11,7 @@ class CustomSignIn extends SignIn {
     const urlParams = new URLSearchParams(window.location.search);
     const state = urlParams.get('state');
     const tokenType = "Basic";
-    const accessToken = "8c239996-ff01-4a24-a79f-ab12db3b4c8c";
+    const accessToken = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);;
     const redirectUri = urlParams.get('redirect_uri');
     window.location.replace(redirectUri + "?access_token=" + accessToken + "&state=" + state + "&token_type=" + tokenType);
   }
