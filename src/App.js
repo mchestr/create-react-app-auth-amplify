@@ -7,6 +7,15 @@ import aws_exports from './aws-exports';
 Amplify.configure(aws_exports);
 
 class CustomSignIn extends SignIn {
+  redirect() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const state = urlParams.get('state');
+    const tokenType = "Basic";
+    const accessToken = "mytoken";
+    const redirectUri = urlParams.get('redirect_uri');
+    window.location.replace(redirectUri + "?access_token=" + accessToken + "&state=" + state + "&token_type=" + tokenType);
+  }
+
   showComponent() {
     return (
       <div>
@@ -37,24 +46,10 @@ class CustomSignIn extends SignIn {
             </div>
         </div>
         <div className="aws-signin-general-button-box">
-            <button onClick={() => super.signIn()} id="signin_button" type="button" className="aws-signin-button aws-signin-button-size-normal aws-signin-button-variant-primary" style={{width: "100%"}}><span id="signin_button_text" style={{color: "white; font-weight: bold;"}}>Sign in</span></button>
+            <button onClick={() => this.redirect()} id="signin_button" type="button" className="aws-signin-button aws-signin-button-size-normal aws-signin-button-variant-primary" style={{width: "100%"}}><span id="signin_button_text" style={{color: "white; font-weight: bold;"}}>Sign in</span></button>
         </div>
       </div>
     );
-  }
-}
-
-class App extends React.Component {
-  render() {
-    if (this.props.authState === "signedIn") {
-      return (
-        <div>
-          <h1>Internal App</h1>
-        </div>
-      );
-    } else {
-      return null;
-    }
   }
 }
 
@@ -63,7 +58,6 @@ class Root extends Component {
     return (
       <Authenticator hide={[SignIn]} amplifyConfig={aws_exports}>
         <CustomSignIn />
-        <App />
       </Authenticator>
     );
   }
