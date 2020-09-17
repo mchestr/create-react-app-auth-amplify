@@ -7,11 +7,11 @@ import aws_exports from './aws-exports';
 Amplify.configure(aws_exports);
 
 class CustomSignIn extends SignIn {
-  redirect() {
+  signIn() {
     const urlParams = new URLSearchParams(window.location.search);
     const state = urlParams.get('state');
     const tokenType = "Basic";
-    const accessToken = "mytoken";
+    const accessToken = "8c239996-ff01-4a24-a79f-ab12db3b4c8c";
     const redirectUri = urlParams.get('redirect_uri');
     window.location.replace(redirectUri + "?access_token=" + accessToken + "&state=" + state + "&token_type=" + tokenType);
   }
@@ -26,7 +26,7 @@ class CustomSignIn extends SignIn {
           </div>
         </div>
         <div className="aws-signin-general-input-box">
-          <input onChange={this.handleInputChange} id="username" key="username" name="username" className="aws-signin-textfield" autocorrect="off" autocapitalize="off" />
+          <input onChange={this.handleInputChange} id="username" key="username" name="username" className="aws-signin-textfield" autoCorrect="off" autoCapitalize="off" />
           <div id="password_input_alert" className="signin-input-warning" style={{display: "none"}}>
             <span id="password_input_alert_content" className="awsui-text-small aws-signin-color-red"></span>
           </div>
@@ -34,19 +34,19 @@ class CustomSignIn extends SignIn {
         <div className="aws-signin-general-label-box">
             <div className="aws-signin-general-link-box-no-margin main-table">
                 <div className="aws-signin-float-left" style={{width: "40%"}}><b>Password</b></div>
-                <div className="aws-signin-float-right" style={{textAlign: "right; width:58%;"}}>
+                <div className="aws-signin-float-right" style={{textAlign: "right", width: "58%"}}>
                     <span id="root_forgot_password_link">Forgot password?</span>
                 </div>
             </div>
         </div>
         <div className="aws-signin-general-input-box">
-            <input onChange={this.handleInputChange} id="password" key="password" name="password" type="password" className="aws-signin-textfield" autocorrect="off" autocapitalize="off" />
+            <input onChange={this.handleInputChange} id="password" key="password" name="password" type="password" className="aws-signin-textfield" autoCorrect="off" autoCapitalize="off" />
             <div id="password_input_alert" className="signin-input-warning" style={{display: "none"}}>
                 <span id="password_input_alert_content" className="awsui-text-small aws-signin-color-red"></span>
             </div>
         </div>
         <div className="aws-signin-general-button-box">
-            <button onClick={() => this.redirect()} id="signin_button" type="button" className="aws-signin-button aws-signin-button-size-normal aws-signin-button-variant-primary" style={{width: "100%"}}><span id="signin_button_text" style={{color: "white; font-weight: bold;"}}>Sign in</span></button>
+            <button onClick={() => this.signIn()} id="signin_button" type="button" className="aws-signin-button aws-signin-button-size-normal aws-signin-button-variant-primary" style={{width: "100%"}}><span id="signin_button_text" style={{color: "white", fontWeight: "bold"}}>Sign in</span></button>
         </div>
       </div>
     );
