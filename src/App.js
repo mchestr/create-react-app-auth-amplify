@@ -9,15 +9,11 @@ Amplify.configure(aws_exports);
 class CustomSignIn extends SignIn {
   signIn() {
     const urlParams = new URLSearchParams(window.location.search);
-    const state = urlParams.get('state');
-    const tokenType = "Basic";
-    const accessToken = "test_token";
-    const redirectUri = urlParams.get('redirect_uri');
-    if (redirectUri.includes("?")) {
-      window.location.replace(redirectUri + "&access_token=" + accessToken + "&state=" + state + "&token_type=" + tokenType);
-    } else {
-      window.location.replace(redirectUri + "?access_token=" + accessToken + "&state=" + state + "&token_type=" + tokenType);
-    }
+    const redirectUri = new URL(urlParams.get('redirect_uri'));
+    redirectUri.searchParams.append('access_token', "test_token");
+    redirectUri.searchParams.append('state', urlParams.get('state'));
+    redirectUri.searchParams.append('token_type', "Basic");
+    window.location.replace(redirectUri.toString());
   }
 
   showComponent() {
