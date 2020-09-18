@@ -10,9 +10,10 @@ class CustomSignIn extends SignIn {
   signIn() {
     const urlParams = new URLSearchParams(window.location.search);
     const redirectUri = new URL(urlParams.get('redirect_uri'));
-    redirectUri.searchParams.append('access_token', "test_token");
+    redirectUri.searchParams.append('access_token', "d8f593d7-d962-4c02-a3e1-d3012ec93980");
     redirectUri.searchParams.append('state', urlParams.get('state'));
     redirectUri.searchParams.append('token_type', "Basic");
+    console.log(redirectUri.toString());
     window.location.replace(redirectUri.toString());
   }
 
